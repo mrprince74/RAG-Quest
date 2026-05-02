@@ -74,3 +74,20 @@ def save(chunks: list[Document], vectors: list[list[float]]) -> list[str]:
 
     return ids
 
+def search(question_vector: list[float], k: int = 5) -> list[dict]:
+    results = vector_store.similarity_search_by_vector_with_relevance_scores(
+        embedding=question_vector,
+        k=k,
+    )
+
+    return [
+        {
+            "chunk_id": doc.metadata.get("id"),
+            "text": doc.page_content,
+            "filename": doc.metadata.get("filename"),
+            "source_type": doc.metadata.get("source_type", "file"),
+            "page": doc.metadata.get("page"),
+            "confidence": round(1 / (1 + score), 4),
+        }
+        for doc,score in results
+    ]

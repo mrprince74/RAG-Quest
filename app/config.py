@@ -7,3 +7,4 @@ CHUNK_OVERLAP = 100
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 CHROMA_COLLECTION_NAME = "documents"
 CHROMA_PERSIST_DIR = "./chroma_db"
+GEMINI_MODEL = "gemini-2.5-flash"
