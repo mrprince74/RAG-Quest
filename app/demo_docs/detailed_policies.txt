@@ -1,0 +1,69 @@
+# Company Policies - Detailed
+
+Company: NexaTech Solutions
+
+Document: Internal Policies Update - 2026
+
+1.  Documentation Policy
+
+-   All technical decisions must be documented in Notion.
+
+-   Each document must include context, decision, and trade-offs.
+
+-   Owners must be clearly assigned.
+
+2.  Meeting Policy
+
+-   Every meeting must have a written summary within 24 hours.
+
+-   Summaries must include decisions and action items.
+
+-   Meetings without clear agenda should be avoided.
+
+3.  Communication Policy
+
+-   Slack threads exceeding 20 messages must be summarized.
+
+-   Important decisions cannot be made only in Slack.
+
+-   Use dedicated channels for each project.
+
+4.  Incident Management Policy
+
+-   All incidents must have postmortem reports.
+
+-   Reports must include root cause and prevention steps.
+
+-   Blameless culture must be maintained.
+
+5.  Data & Dashboard Policy
+
+-   Dashboards must include explanations for metrics.
+
+-   Data sources must be documented.
+
+-   Avoid duplicate dashboards across teams.
+
+6.  Code & Deployment Policy
+
+-   All code must go through code review.
+
+-   CI/CD pipelines must include automated testing.
+
+-   No direct deployments to production.
+
+7.  Knowledge Sharing Policy
+
+-   Weekly tech talks encouraged.
+
+-   Internal wiki must be updated regularly.
+
+-   New hires must go through structured onboarding.
+
+Goal:
+
+-   Reduce information fragmentation.
+
+-   Improve transparency and team alignment.
+
+-   Enable faster and better decision-making.

@@ -22,10 +22,10 @@ def get_all_documents() -> list[dict]:
         if file_hash not in seen_hashes:
             seen_hashes.add(file_hash)
             documents.append({
-                "title" : metadata["title"],
+                "title" : metadata["filename"],
                 "document_id" : metadata["file_hash"],
                 "file_type" : metadata["file_type"],
-                "total_pages" : metadata["total_pages"],
+                "total_pages" : metadata.get("total_pages", None),
                 "file_size_bytes" : metadata["file_size_bytes"],
             })
 
@@ -41,14 +41,15 @@ def get_document_by_id(file_hash: str) -> Optional[dict]:
         return None
 
     metadata = results["metadatas"][0]
-
+    metadata = {k:v for k,v in metadata.items() if k not in ("source", "id")}
+    
     chunks = [
         {
             "chunk_id": results["ids"][i],
             "text": results["documents"][i],
             **{k: v for k, v in results["metadatas"][i].items()
                if k not in ("file_hash", "filename", "file_size_bytes",
-                            "file_type", "ingested_at", "page_count", "source")},
+                            "file_type", "ingested_at", "page_count")},
         }
         for i in range(len(results["ids"]))
     ]
@@ -74,7 +75,7 @@ def save(chunks: list[Document], vectors: list[list[float]]) -> list[str]:
 
     return ids
 
-def search(question_vector: list[float], k: int = 5) -> list[dict]:
+def search(question_vector: list[float], k: int = 4) -> list[dict]:
     results = vector_store.similarity_search_by_vector_with_relevance_scores(
         embedding=question_vector,
         k=k,
@@ -87,7 +88,7 @@ def search(question_vector: list[float], k: int = 5) -> list[dict]:
             "filename": doc.metadata.get("filename"),
             "source_type": doc.metadata.get("source_type", "file"),
             "page": doc.metadata.get("page"),
-            "confidence": round(1 / (1 + score), 4),
+            "confidence": round(1 - (score / 2), 2)
         }
         for doc,score in results
     ]

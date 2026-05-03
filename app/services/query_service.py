@@ -24,7 +24,6 @@ async def query(request: QueryRequest) -> QueryResponse:
     )
 
     prompt = f"""You are a helpful assistant. Answer the question using only the context below.
-If the answer is not in the context, say you don't know.
 
 Context:
 {context}
